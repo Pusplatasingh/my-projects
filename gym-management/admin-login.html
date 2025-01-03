@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text */
+        }
+        .container {
+            background-color: #1a1a1a; /* Dark container background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #ffffff; /* White heading text */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border: none; /* No border */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker color on hover */
+        }
+        .text-danger {
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <div id="errorMessage" class="text-danger mt-2">Invalid username or password!</div>
+        </form>
+    </div>
+
+    <script>
+
+        document.getElementById('loginForm').onsubmit = function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Check credentials (hardcoded for demonstration purposes)
+            if (username === "admin" && password === "admin123") {
+                localStorage.setItem('loggedInUser', username);
+                window.location.href = "dashboard.html"; // Redirect to the dashboard
+            } else {
+                document.getElementById('errorMessage').style.display = 'block'; // Show error message
+            }
+        };
+    </script>
+</body>
+
+</html>
