@@ -1,10 +1,3 @@
-Got it! You want to explicitly mention that you used AI assistance during the project creation process. Here's how you can incorporate that into your README:
-
-### Adding AI Assistance to the README
-
-You can add a section titled "AI Assistance" that acknowledges the use of AI tools throughout the project development process. Here’s an updated version of your README including this acknowledgment:
-
-```markdown
 # my-projects
 # Gym Management Dashboard
 
