@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000; /* Set body background to black */
+            color: #ffffff; /* Text color to white for contrast */
+        }
+
+        .navbar {
+            background-color: #222222; /* Dimmed dark navbar background */
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #ffffff !important; /* White text for navbar links */
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            color: #ffffff; /* White text for table content */
+        }
+
+        .table {
+            background-color: #1a1a1a; /* Dark table background */
+        }
+
+        .btn-primary,
+        .btn-warning,
+        .btn-danger {
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Include box-shadow in transition */
+        }
+
+        .btn-primary:hover,
+        .btn-warning:hover,
+        .btn-danger:hover {
+            transform: scale(1.05); /* Slight scale up on hover */
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.6); /* Glowing effect */
+        }
+
+        .modal-content {
+            background-color: #1a1a1a; /* Dark modal background */
+            color: #ffffff; /* White text in the modal */
+        }
+
+        label {
+            color: #ffffff; /* White labels in forms */
+        }
+
+        .alert-warning {
+            color: #000; /* Change text color of alert to black */
+            background-color: #ffc107; /* Yellow background for alert */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <a class="navbar-brand" href="#">Gym Dashboard</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="members.html">Members</a></li>
+                <li class="nav-item"><a class="nav-link" href="payment-management.html">Payment Management</a></li>
+            </ul>
+            <div class="ml-auto">
+                <button class="btn btn-outline-info" data-toggle="modal" data-target="#addMemberModal">Add Member</button>
+                <button class="btn btn-outline-info" id="profileButton" onclick="logout()">Profile</button> <!-- Updated Profile button -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mt-5">Members</h1>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="membersList">
+                <!-- Member rows will be populated here dynamically -->
+            </tbody>
+        </table>
+        <div class="alert alert-warning" id="noMembersMessage" style="display: none;">
+            No members found.
+        </div>
+    </div>
+
+    <!-- Add Member Modal -->
+    <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMemberModalLabel">Add New Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="memberForm">
+                        <div class="form-group">
+                            <label for="memberName">Name</label>
+                            <input type="text" class="form-control" id="memberName" placeholder="Enter member name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberEmail">Email</label>
+                            <input type="email" class="form-control" id="memberEmail" placeholder="Enter member email" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addMember()">Add Member</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Logout functionality -->
+    <script>
+        function logout() {
+            localStorage.removeItem('loggedInUser'); // Clear user info on logout if needed
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+
+        // Load Members from localStorage
+        function loadMembers() {
+            const members = JSON.parse(localStorage.getItem('members')) || [];
+            const membersList = document.getElementById('membersList');
+            const noMembersMessage = document.getElementById('noMembersMessage');
+
+            // Clear the current members list
+            membersList.innerHTML = '';
+
+            // Check if there are any members to display
+            if (members.length === 0) {
+                noMembersMessage.style.display = 'block'; // Show no members message
+                return;
+            }
+
+            members.forEach((member, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${member.name}</td>
+                    <td>${member.email}</td>
+                    <td>${member.membershipStatus || "Active"}</td>
+                    <td>
+                        <a href="member-details.html?email=${encodeURIComponent(member.email)}" class="btn btn-info">View Details</a>
+                        <button class="btn btn-danger btn-sm" onclick="deleteMember(${index})">Delete</button>
+                        <button class="btn btn-warning btn-sm" onclick="toggleStatus(${index})">${member.membershipStatus === 'Inactive' ? 'Activate' : 'Deactivate'}</button>
+                    </td>
+                `;
+                membersList.appendChild(row);
+            });
+        }
+
+        // Add a new member to localStorage
+        function addMember() {
+            const memberName = document.getElementById('memberName').value.trim();
+            const memberEmail = document.getElementById('memberEmail').value.trim();
+
+            // Validate email format
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(memberEmail)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Fetch existing members
+            const members = JSON.parse(localStorage.getItem('members')) || [];
+
+            // Check for duplicates
+            if (members.some(m => m.email === memberEmail)) {
+                alert("A member with this email already exists.");
+                return;
+            }
+
+            // Create new member object with default status and plan type
+            const newMember = {
+                name: memberName,
+                email: memberEmail,
+                membershipStatus: "Active", // Set default membership status
+                planType: "Standard" // Set default plan type
+            };
+
+            members.push(newMember);
+            localStorage.setItem('members', JSON.stringify(members));
+
+            // Clear and reload the member list
+            document.getElementById('memberForm').reset();
+            $('#addMemberModal').modal('hide');
+            loadMembers();
+        }
+
+        // Delete a member from localStorage
+        function deleteMember(index) {
+            const members = JSON.parse(localStorage.getItem('members')) || [];
+            members.splice(index, 1);
+            localStorage.setItem('members', JSON.stringify(members));
+            loadMembers();
+            alert("Member deleted successfully.");
+        }
+
+        // Toggle membership status
+        function toggleStatus(index) {
+            const members = JSON.parse(localStorage.getItem('members')) || [];
+            members[index].membershipStatus = members[index].membershipStatus === 'Inactive' ? 'Active' : 'Inactive';
+            localStorage.setItem('members', JSON.stringify(members));
+            loadMembers();
+            alert("Member status updated successfully.");
+        }
+
+        // Call function to load members on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMembers();
+
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                document.getElementById('profileButton').innerText = `Hi ${loggedInUser}`; // Change profile button text
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
