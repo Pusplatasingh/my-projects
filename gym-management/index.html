@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Dashboard Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #000; /* Changed to black background */
+            color: #ffffff; /* Set text color to white for visibility */
+        }
+        .dashboard {
+            max-width: 800px;
+            margin: auto;
+            background: #1a1a1a; /* Dark dashboard background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        h1, h2, h4 {
+            text-align: center;
+            color: #ffffff; /* Ensuring headings are white */
+        }
+        .buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #5cb85c; /* Button color */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Added box-shadow to transition */
+        }
+        button:hover {
+            background-color: #4cae4c;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(92, 184, 92, 0.5); /* Glowing effect on hover */
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6); /* Increased opacity for modal background */
+            padding: 20px;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #ffffff; /* Ensure list item text is visible */
+        }
+        @media (max-width: 600px) {
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <h1>Your Dashboard</h1>
+
+    <!-- Add buttons for Gym Management System -->
+    <div class="buttons">
+        <button id="addMemberBtn">Add New Member</button>
+        <button id="processPaymentBtn">Process Payment</button>
+        <button id="viewSchedulesBtn">View Schedules</button>
+    </div>
+
+    <!-- Current Members -->
+    <h2>Current Members</h2>
+    <ul id="memberList"></ul>
+</div>
+
+<!-- Add New Member Modal -->
+<div id="addMemberModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeAddMemberModal">×</span>
+        <h4>Add New Member</h4>
+        <form id="memberForm">
+            <label for="memberName">Name:</label>
+            <input type="text" id="memberName" required>
+            <label for="memberEmail">Email:</label>
+            <input type="email" id="memberEmail" required>
+            <label for="membershipType">Membership Type:</label>
+            <select id="membershipType">
+                <option value="Basic">Basic</option>
+                <option value="Premium">Premium</option>
+            </select>
+            <button type="submit">Add Member</button>
+        </form>
+    </div>
+</div>
+
+<!-- Process Payment Modal -->
+<div id="processPaymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeProcessPaymentModal">×</span>
+        <h4>Process Payment</h4>
+        <form id="paymentForm">
+            <label for="memberSelect">Select Member:</label>
+            <select id="memberSelect" required></select>
+            <label for="paymentAmount">Amount:</label>
+            <input type="number" id="paymentAmount" required>
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+</div>
+
+<!-- View Schedules Modal -->
+<div id="viewSchedulesModal" class="modal">
+    <div class="modal-content" id="schedulesContent">
+        <span class="close" id="closeViewSchedulesModal">×</span>
+        <h4>Gym Schedule</h4>
+        <ul id="scheduleList"></ul>
+    </div>
+</div>
+
+<script>
+    // Function to load members from localStorage
+    function loadMembers() {
+        const members = JSON.parse(localStorage.getItem('members')) || [];
+        const memberList = document.getElementById('memberList');
+        memberList.innerHTML = '';
+        members.forEach(member => {
+            const li = document.createElement('li');
+            li.textContent = `${member.name} (${member.email}) - Type: ${member.membershipType}`;
+            memberList.appendChild(li);
+        });
+    }
+
+    // Function to load schedules
+    function loadSchedules() {
+        const schedules = JSON.parse(localStorage.getItem('schedules')) || [];
+        const scheduleList = document.getElementById('scheduleList');
+        scheduleList.innerHTML = '';
+        schedules.forEach(schedule => {
+            const li = document.createElement('li');
+            li.textContent = `Class: ${schedule.className}, Time: ${schedule.time}`;
+            scheduleList.appendChild(li);
+        });
+    }
+
+    // Adding a new member
+    document.getElementById("addMemberBtn").addEventListener("click", function() {
+        document.getElementById("addMemberModal").style.display = "block";
+    });
+
+    document.getElementById("memberForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const memberName = document.getElementById("memberName").value;
+        const memberEmail = document.getElementById("memberEmail").value;
+        const membershipType = document.getElementById("membershipType").value;
+
+        const members = JSON.parse(localStorage.getItem('members')) || [];
+        members.push({ name: memberName, email: memberEmail, membershipType: membershipType });
+        localStorage.setItem('members', JSON.stringify(members));
+        
+        document.getElementById("memberForm").reset();
+        loadMembers();
+        document.getElementById("addMemberModal").style.display = "none";
+    });
+
+    // Processing a payment
+    document.getElementById("processPaymentBtn").addEventListener("click", function() {
+        const members = JSON.parse(localStorage.getItem('members')) || [];
+        const memberSelect = document.getElementById("memberSelect");
+        memberSelect.innerHTML = '';
+        members.forEach((member, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `${member.name} (${member.email})`;
+            memberSelect.appendChild(option);
+        });
+
+        document.getElementById("processPaymentModal").style.display = "block";
+    });
+
+    document.getElementById("paymentForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const memberIndex = document.getElementById("memberSelect").value;
+        const amount = document.getElementById("paymentAmount").value;
+
+        // Here you could store payment info as needed
+
+        document.getElementById("paymentForm").reset();
+        document.getElementById("processPaymentModal").style.display = "none";
+    });
+
+    // Viewing schedules
+    document.getElementById("viewSchedulesBtn").addEventListener("click", function() {
+        loadSchedules();
+        document.getElementById("viewSchedulesModal").style.display = "block";
+    });
+
+    // Close modals
+    document.querySelectorAll('.close').forEach(function(closeBtn) {
+        closeBtn.onclick = function() {
+            this.parentElement.parentElement.style.display = "none";
+        };
+    });
+
+    // Load members on page load
+    window.onload = function() {
+        loadMembers();
+    };
+</script>
+
+</body>
+</html>
