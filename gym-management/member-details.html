@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text for contrast */
+        }
+
+        .navbar {
+            background-color: #222222; /* Dark grey navbar */
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #ffffff !important; /* White text for navbar links */
+        }
+
+        #memberInfo {
+            background-color: #1a1a1a; /* Dark background for member info */
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        h1, h3 {
+            color: #ffffff; /* White headings */
+        }
+
+        .list-unstyled {
+            padding-left: 0;
+        }
+
+        li {
+            color: #d1d1d1; /* Light grey for payment history items */
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand" href="#">Gym Dashboard</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="members.html">Members</a></li>
+                <li class="nav-item"><a class="nav-link" href="payment-management.html">Payment Management</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mt-5">Member Details</h1>
+        <div id="memberInfo" class="mt-4">
+            <p><strong>Name:</strong> <span id="memberName"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Membership Status:</strong> <span id="membershipStatus"></span></p>
+            <p><strong>Plan Type:</strong> <span id="planType"></span></p>
+        </div>
+        <h3 class="mt-4">Payment History</h3>
+        <ul id="paymentList" class="list-unstyled"></ul>
+    </div>
+
+    <script>
+        function loadMemberDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const memberEmail = urlParams.get('email'); // Get the email from the URL
+
+            const members = JSON.parse(localStorage.getItem('members')) || [];
+            const payments = JSON.parse(localStorage.getItem('payments')) || []; // Assuming payments are stored similarly
+
+            // Find the member by email
+            const member = members.find(m => m.email === memberEmail);
+
+            if (member) {
+                document.getElementById('memberName').innerText = member.name;
+                document.getElementById('membershipStatus').innerText = member.membershipStatus || "Not Available";
+                document.getElementById('planType').innerText = member.planType || "Not Specified";
+                document.getElementById('email').innerText = member.email;
+
+                const paymentList = document.getElementById('paymentList');
+                paymentList.innerHTML = ''; // Clear existing payments
+
+                // Populate payment history
+                payments.forEach(payment => {
+                    if (payment.email === member.email) {
+                        const listItem = document.createElement('li');
+                        listItem.innerText = `Payment: $${payment.amount} (Paid on ${new Date(payment.date).toLocaleDateString()})`;
+                        paymentList.appendChild(listItem);
+                    }
+                });
+            } else {
+                alert("Member not found!");
+            }
+        }
+
+        // Load member details on page load
+        document.addEventListener('DOMContentLoaded', loadMemberDetails);
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
