@@ -1,6 +1,8 @@
 Gym Management Dashboard
+
 🚀 Project Overview
 Welcome to the Gym Management Dashboard! This web application is designed for gym administrators to efficiently manage member information, payments, and schedules. Developed using HTML, CSS, JavaScript, and Bootstrap, this project showcases a responsive design with a modern dark theme. 
+
 🔑 Key Features
 1.	Admin Login Page:
 o	Responsive design using Bootstrap
