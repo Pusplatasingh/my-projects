@@ -136,7 +136,3 @@ This section rounds out your README, helping potential collaborators or users un
 ### **Final Notes** 📝
 This README template covers all the necessary sections to ensure that anyone interacting with your project has all the information they need. Whether it’s to set up the project, contribute, or simply understand the functionalities, everything is organized for ease of access. 
 
-<<<<<<< HEAD
-=======
-Let me know if you need any more additions or edits to the README!
->>>>>>> 36e069de8ccbad4381f7c8151ca6e7102a1acab2
