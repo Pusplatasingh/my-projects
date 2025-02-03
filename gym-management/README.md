@@ -127,9 +127,3 @@ Here’s a preview of the application’s various pages:
 ### **Payment Management Dashboard**:
 ![Payment Management Dashboard](payment_management.png)
 
----
-
-This section rounds out your README, helping potential collaborators or users understand what’s in store for the project, how they can contribute, and what’s planned for the future.
-
----
-
