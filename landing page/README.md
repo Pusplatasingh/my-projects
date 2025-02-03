@@ -89,7 +89,6 @@ A big thank you to **AI** for assisting with the initial ideas, enhancing the co
 - **Contributions**: Project concept, design, development, and enhancements.
 
 ---
-
 ## 📜 **License**
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
