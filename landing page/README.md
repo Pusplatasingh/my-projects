@@ -69,24 +69,6 @@ In the **Updated Version**, we took the landing page to the next level with seve
 
 ---
 
-## 📸 **Preview**
-
-### **Basic Version**: 
-
-Here is the preview of the **Basic Version** of the landing page:
-
-![Basic Version of Landing Page](basics.png)
-
----
-
-### **Updated Version**:
-
-Here is the preview of the **Updated Version** of the landing page:
-
-![Updated Version of Landing Page](landing_page.png)
-
----
-
 ## 🤖 **AI Assistance** 
 
 A big thank you to **AI** for assisting with the initial ideas, enhancing the code structure, and providing valuable suggestions in the development process. The guidance from AI helped make the project more efficient and feature-rich. 🙏
