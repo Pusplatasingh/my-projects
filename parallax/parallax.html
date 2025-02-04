@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Parallax Nature Exploration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background-color: rgba(0, 51, 0, 0.9); /* Dark green with partial transparency */
+            padding: 10px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-title {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem; 
+            margin-right: auto;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .navbar a:hover {
+            color: #ecf0f1;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .pimg1, .pimg2, .pimg3, .pimg4, .pimg5 {
+            position: relative;
+            min-height: 100vh;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .pimg1 { background-image: url('nature.webp'); }
+        .pimg2 { background-image: url('forest.jpeg'); }
+        .pimg3 { background-image: url('mountain.jpg'); }
+        .pimg4 { background-image: url('wildlife.webp'); }
+        .pimg5 { background-image: url('naturegift.jpg'); }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Lower opacity */
+        }
+
+        .ptext {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+
+        .textBg {
+            /* Remove white background */
+            /* color: black; // Optional: make the text color dark */
+            padding: 20px;
+            z-index: 10; /* Ensure text is above the overlay */
+        }
+
+        .section {
+            padding: 40px 5%;
+            text-align: center;
+            background-color: rgba(0, 51, 0, 0.8); /* Dark green with partial transparency */
+            color: #ddd; /* Text color */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            margin: 0;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            padding: 0 20px;
+        }
+
+        @media (max-width: 768px) {
+            .ptext { font-size: 2rem; }
+            .section { padding: 30px 5%; }
+            h2 { font-size: 2rem; }
+            .pimg1 {
+                background-size: contain; 
+                background-attachment: scroll; 
+                min-height: 50vh; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ptext { font-size: 1.5rem; letter-spacing: 1px; }
+            h2 { font-size: 1.5rem; }
+            .pimg1 {
+                min-height: 40vh; 
+                background-size: contain; 
+            }
+        }
+
+        .hamburger {
+            display: none; 
+            cursor: pointer;
+            font-size: 2rem;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .navbar a {
+                display: none; 
+            }
+            .navbar {
+                justify-content: space-between;
+            }
+            .hamburger {
+                display: block; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" role="navigation">
+        <div class="navbar-title" aria-label="Website Title">Parallax Nature Exploration</div>
+        <div class="hamburger" aria-label="Toggle Navigation" onclick="toggleMenu()">☰</div>
+        <div class="navbar-links">
+            <a href="#pimg1" aria-label="Embrace Nature Section">Embrace Nature</a>
+            <a href="#pimg2" aria-label="Forests Section">Forests</a>
+            <a href="#pimg3" aria-label="Mountains Section">Mountains</a>
+            <a href="#pimg4" aria-label="Wildlife Section">Wildlife</a>
+            <a href="#pimg5" aria-label="Nature's Eternal Gift Section">Nature's Eternal Gift</a> 
+        </div>
+    </nav>
+
+    <section class="pimg1" id="pimg1" role="banner" aria-label="Embrace Nature">
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="ptext">
+            <span class="textBg">Embrace Nature</span>
+        </div>
+    </section>
+    
+    <section class="section" role="main">
+        <h2>Whispers of the Flowing Waters</h2>
+        <p>The soothing sound of rivers flowing over stones is nature's melody—a calming reminder of the world's untamed beauty. Rivers are the lifeblood of our ecosystems, flowing gracefully through landscapes and nurturing the wildlife around them. They provide water to forests, fields, and cities alike, supporting both human societies and the myriad of species that depend on them. From the snow-capped mountains to the vast oceans, rivers carve their way through history, gifting us with fertile plains and rich biodiversity.</p>
+        <p>Whether it's the serene banks of a slow-moving stream or the roaring currents of a mighty river, the experience of being near water is invigorating. Observing wildlife along riverbanks, such as birds diving for fish, beavers constructing dams, or deer drinking at dusk, offers a perfect opportunity to connect with nature. Let's cherish these waterways, protect their health, and commit to sustainability.</p>
+    </section>
+    
+    <section class="pimg2" id="pimg2" role="banner" aria-label="Forests">
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="ptext">
+            <span class="textBg">Forests</span>
+        </div>
+    </section>
+    
+    <section class="section" role="main">
+        <h2>Enchanted Canopies: A Journey Through the Woods</h2>
+        <p>Forests are often described as the Earth’s lungs, producing oxygen and absorbing carbon dioxide. They teem with life, housing a rich tapestry of flora and fauna that can take one's breath away. Each forest has a unique character shaped by its native species, weather patterns, and geographical features. Walking through a forest is akin to stepping into another world—towering trees form a natural cathedral with dappled sunlight painting the forest floor.</p>
+        <p>The sounds of rustling leaves, birdsong, and the distant calls of wildlife blend harmoniously to create a serene soundscape. Despite their beauty, forests are under threat from deforestation, climate change, and habitat loss. It is crucial for all of us to play our part in protecting these vital ecosystems, whether through supporting conservation efforts or spending time in our local woods to appreciate their beauty.</p>
+    </section>
+    
+    <section class="pimg3" id="pimg3" role="banner" aria-label="Mountains">
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="ptext">
+            <span class="textBg">Mountains</span>
+        </div>
+    </section>
+    
+    <section class="section" role="main">
+        <h2>Summits of Splendor: Nature’s Majestic Giants</h2>
+        <p>Mountains are nature's majestic monuments, towering high above the earth and displaying rugged beauty that captivates our spirits. They offer breathtaking vistas, from the snowy peaks of the Himalayas to the lush green slopes of the Andes. Each mountain range tells a story of geological triumphs spanning millions of years, reminding us of the earth’s dynamic beauty.</p>
+        <p>The diverse habitats found at varying elevations across mountain ranges sustain unique ecosystems. Expeditions to climb these giants not only challenge the body but also offer the soul rejuvenating moments of connection with the untamed natural world. Hiking trails reveal hidden lakes and valleys, making every step an adventure.</p>
+        <p>However, these majestic structures are not immune to the impacts of climate change, leading to glacial retreat and loss of native species. It's vital that we promote conservation initiatives aimed at preserving these awe-inspiring landscapes for future generations.</p>
+    </section>
+
+    <section class="pimg4" id="pimg4" role="banner" aria-label="Wildlife">
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="ptext">
+            <span class="textBg">Wildlife</span>
+        </div>
+    </section>
+
+    <section class="section" role="main">
+        <h2>The Dance of Life: Nature’s Wild Symphony</h2>
+        <p>Wildlife is an essential part of nature’s tapestry, showcasing a spectacular array of forms, colors, and behaviors. From the majestic elephants of the savannah to the delicate butterflies fluttering through fields, biodiversity enriches our planet. Each species plays a unique role in its habitat, contributing to the delicate balance of ecosystems.</p>
+        <p>Observing wildlife in its natural habitat offers a profound insight into the interconnectedness of life. Wildlife encounters encourage us to reflect on our place in nature and the responsibilities we bear. However, many species face threats from habitat destruction, poaching, and climate change.</p>
+        <p>Conservation efforts are paramount in ensuring the survival of threatened species and their habitats. By supporting wildlife sanctuaries, participating in clean-up efforts, and advocating for legislation that protects natural environments, we can safeguard the rich diversity of life on Earth. Together, we can create a sustainable future for all living beings.</p>
+    </section>
+
+    <section class="pimg5" id="pimg5" role="banner" aria-label="Nature's Eternal Gift">
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="ptext">
+            <span class="textBg">Nature's Eternal Gift</span>
+        </div>
+    </section>
+
+    <script>
+        // Smooth Scroll Functionality
+        const links = document.querySelectorAll('.navbar a');
+        for (const link of links) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // Hamburger Menu Functionality
+        function toggleMenu() {
+            const links = document.querySelectorAll('.navbar a:not(.hamburger)');
+            links.forEach(link => {
+                link.style.display = (link.style.display === "block") ? "none" : "block";
+            });
+        }
+    </script>
+
+</body>
+</html>
