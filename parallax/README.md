@@ -1,5 +1,5 @@
 ---
-#🌿 **Parallax Nature Exploration Website** 🌳
+##🌿 **Parallax Nature Exploration Website** 🌳
 
 Welcome to the **Parallax Nature Exploration Website**! Immerse yourself in the beauty of nature with this interactive and visually stunning landing page. The page uses **parallax scrolling** effects to create a dynamic experience, as if you’re exploring nature’s wonders right from your screen.
 
