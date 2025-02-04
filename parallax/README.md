@@ -92,7 +92,7 @@ A huge thank you to **AI** for assisting with initial ideas, helping to improve 
 
 ## 🙌 **Contributors** 🌟
 
-- **Your Name** - Project Lead, Design, Development, and Enhancements.
+- **Pusplata Singh** - Project Lead, Design, Development, and Enhancements.
 - **AI** - Initial ideas and support with technical suggestions.
 
 ---
