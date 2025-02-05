@@ -93,6 +93,7 @@ A huge thank you to **AI** for assisting with initial ideas, helping to improve 
 ## 🙌 **Contributors** 🌟
 
 - **Pusplata Singh** - Project Lead, Design, Development, and Enhancements.
+- **Email** - pusplatasingh1104@gmail.com
 - **AI** - Initial ideas and support with technical suggestions.
 
 ---
