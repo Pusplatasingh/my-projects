@@ -85,7 +85,8 @@ A big thank you to **AI** for assisting with the initial ideas, enhancing the co
 
 ## 🙌 **Contributors**
 
-- **Your Name** - Pusplata Singh  
+- **Name** - Pusplata Singh
+- **Email** - pusplatasingh1104@gmail.com
 - **Contributions**: Project concept, design, development, and enhancements.
 
 ---
