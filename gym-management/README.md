@@ -54,6 +54,7 @@ To run this project locally, follow these steps:
 I’m eager to hear your thoughts! Feel free to reach out with feedback on design, functionality, or any other features you would like to see. Let’s connect and discuss best practices in web development, AI integration, or gym management solutions!
 
 📧 **Contact**
+-**Pusplata Singh** - Project Lead, Design, Development, and Enhancements.
 - Email: pusplatasingh1104@gmail.com
 - LinkedIn: [www.linkedin.com/in/pusplatasingh](www.linkedin.com/in/pusplatasingh)
 
