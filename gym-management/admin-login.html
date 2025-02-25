@@ -62,9 +62,9 @@
             // Check credentials (hardcoded for demonstration purposes)
             if (username === "admin" && password === "admin123") {
                 localStorage.setItem('loggedInUser', username);
-                window.location.href = "dashboard.html"; // Redirect to the dashboard
+                window.location.href = "dashboard.html"; 
             } else {
-                document.getElementById('errorMessage').style.display = 'block'; // Show error message
+                document.getElementById('errorMessage').style.display = 'block'; 
             }
         };
     </script>
