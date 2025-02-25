@@ -58,8 +58,7 @@
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
-            // Check credentials (hardcoded for demonstration purposes)
+            
             if (username === "admin" && password === "admin123") {
                 localStorage.setItem('loggedInUser', username);
                 window.location.href = "dashboard.html"; 
