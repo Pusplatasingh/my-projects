@@ -274,12 +274,9 @@
             const modalContent = modal.querySelector(".modal-content");
 
             modal.style.display = "none";
-
-            // Remove glowing effect after modal is closed
             modalContent.classList.remove("modal-glow");
         }
 
-        // Close modal if user clicks outside of it
         window.onclick = function(event) {
             const modal = document.getElementById("myModal");
             if (event.target == modal) {
