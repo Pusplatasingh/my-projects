@@ -267,8 +267,8 @@
 
                 document.getElementById('confirmButton').onclick = function() {
                     if (loggedInUser) {
-                        localStorage.removeItem('loggedInUser'); // Logout logic
-                        updateProfileButton(); // Update button for next state
+                        localStorage.removeItem('loggedInUser'); 
+                        updateProfileButton(); 
                     } else {
                         window.location.href = 'admin-login.html'; // Redirect to login page
                     }
