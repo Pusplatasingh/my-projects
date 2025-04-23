@@ -374,7 +374,7 @@
                 return; // Exit if duplicate exists
             }
 
-            // If no duplicate, add new member
+            // If no duplicate, add new 
             const newMember = { name: memberName, email: memberEmail, signupDate: new Date().toISOString() };
             members.push(newMember);
             localStorage.setItem('members', JSON.stringify(members));
