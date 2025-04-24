@@ -371,7 +371,7 @@
             const duplicateMember = members.find(member => member.email === memberEmail);
             if (duplicateMember) {
                 document.getElementById("memberErrorMessage").innerText = "Member with this email already exists!";
-                return; // Exit if duplicate exists
+                return; // Exit if duplicate 
             }
 
             const newMember = { name: memberName, email: memberEmail, signupDate: new Date().toISOString() };
