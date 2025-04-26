@@ -367,7 +367,7 @@
             const memberName = document.getElementById("memberName").value;
             const memberEmail = document.getElementById("memberEmail").value;
 
-            // Check for duplicate 
+            // Check for 
             const duplicateMember = members.find(member => member.email === memberEmail);
             if (duplicateMember) {
                 document.getElementById("memberErrorMessage").innerText = "Member with this email already exists!";
