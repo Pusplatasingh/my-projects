@@ -203,7 +203,6 @@
             alert("Member deleted successfully.");
         }
 
-        // Toggle membership status
         function toggleStatus(index) {
             const members = JSON.parse(localStorage.getItem('members')) || [];
             members[index].membershipStatus = members[index].membershipStatus === 'Inactive' ? 'Active' : 'Inactive';
