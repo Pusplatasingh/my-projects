@@ -198,7 +198,6 @@
             loadMembers();
         }
 
-        // Delete a member from localStorage
         function deleteMember(index) {
             const members = JSON.parse(localStorage.getItem('members')) || [];
             members.splice(index, 1);
