@@ -189,7 +189,6 @@
             members.push(newMember);
             localStorage.setItem('members', JSON.stringify(members));
 
-            // Clear and reload the member list
             document.getElementById('memberForm').reset();
             $('#addMemberModal').modal('hide');
             loadMembers();
