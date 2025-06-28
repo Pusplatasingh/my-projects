@@ -168,10 +168,8 @@
                 return;
             }
 
-            // Fetch existing members
             const members = JSON.parse(localStorage.getItem('members')) || [];
 
-            // Check for duplicates
             if (members.some(m => m.email === memberEmail)) {
                 alert("A member with this email already exists.");
                 return;
