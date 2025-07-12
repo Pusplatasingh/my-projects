@@ -248,7 +248,7 @@
         // Call functions to load members and payments on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadMembers(); // Load member options into the dropdown
-            loadPayments(); // Load existing payments
+            loadPayments();
 
             const loggedInUser = localStorage.getItem('loggedInUser');
             if (loggedInUser) {
