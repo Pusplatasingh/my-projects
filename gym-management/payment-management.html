@@ -237,7 +237,7 @@
             payments = storedPayments; // Load payments into the array
             const tableBody = document.getElementById('paymentTableBody');
             tableBody.innerHTML = ''; // Clear existing rows
-            payments.forEach((payment, index) => appendPaymentToTable(payment, index)); // Append existing payments to the table
+            payments.forEach((payment, index) => appendPaymentToTable(payment, index));
         }
 
         function logout() {
