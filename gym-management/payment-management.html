@@ -148,7 +148,7 @@
             const members = JSON.parse(localStorage.getItem('members')) || [];
             const memberSelect = document.getElementById('memberSelect');
 
-            memberSelect.innerHTML = '<option value="" disabled selected>Select a member</option>'; // Reset options
+            memberSelect.innerHTML = '<option value="" disabled selected>Select a member</option>';
 
             members.forEach(member => {
                 const option = document.createElement('option');
