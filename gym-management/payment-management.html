@@ -161,7 +161,7 @@
         function savePayment() {
             const memberSelect = document.getElementById('memberSelect');
             const selectedEmail = memberSelect.value;
-            const selectedName = memberSelect.options[memberSelect.selectedIndex].text;  // Get the selected member's name
+            const selectedName = memberSelect.options[memberSelect.selectedIndex].text;
             const amount = parseFloat(document.getElementById('amount').value);
             const status = document.getElementById('status').value;
             const paymentIndex = parseInt(document.getElementById('paymentIndex').value);
