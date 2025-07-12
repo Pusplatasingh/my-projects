@@ -236,7 +236,7 @@
             const storedPayments = JSON.parse(localStorage.getItem('payments')) || [];
             payments = storedPayments; // Load payments into the array
             const tableBody = document.getElementById('paymentTableBody');
-            tableBody.innerHTML = ''; // Clear existing rows
+            tableBody.innerHTML = '';
             payments.forEach((payment, index) => appendPaymentToTable(payment, index));
         }
 
